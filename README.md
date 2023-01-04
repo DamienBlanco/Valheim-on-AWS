@@ -72,10 +72,10 @@ Enter these commands one at a time to install the required dependencies, followe
 - sudo apt install lib32gcc-s1 steamcmd"
 - cd ~
 
-Next, run this long command: "steamcmd +force_install_dir +login anonymous /home/steam/.steam/steamapps/common/valheim +app_update 896660 validate +exit". 
+Next, run this long command: "steamcmd +force_install_dir /home/steam/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit". 
 
 This launches steamcmd, logins in using an anonymous user, downloads Valheim (896660 is the identifier used for Valheim in steam's database), and then exits the steamCMD utility.  
 
-
+Navigate to outside 
 
 # Part 3: Cost Optimizations: Auto-scaling your resources when not playing **(Work in Progress)**
