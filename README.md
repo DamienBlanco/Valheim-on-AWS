@@ -33,7 +33,9 @@ Next is the instance type. For the purposes of this blog we will be using the t2
 Next, create a key pair. **This is very important**. This is a file that acts as the password to your instance so make sure you create it and keep it secure. For the purposes of this blog the keypair will be named **Chinese Electric Batman Keypair**. 
 
 Next, under network settings, we will create a security group; this acts as a firewall for our instance. Click "Edit" to open more advanced options. Give your security group a name; ours will be **Valheim-Server Security Group**. Give it a description. Under the security group rules configure the following:
+
 For Security group rule 1: Type = ssh, Source type = anywhere, TCP, and port 22 (already configured).
+
 For Security group rule 2: Type = custom UDP, Source = 0.0.0.0/0, port range of 2456-2458
 
 The first security group allows you to connect to your instance, while the second opens up the UDP ports that Valheim uses to connect to players.
@@ -53,12 +55,12 @@ You should get a final output and then you're finished with Part 1! Next, we'll 
 
 We have created and set up our EC2 linux server and implemented a few basic security measures. Next we'll be installing and configuring the Valheim dedicated server from steam. 
 
-First, we'll create a separate user that we'll run things from (using root user is a bad idea from a security perspective).
+~~First, we'll create a separate user that we'll run things from (using root user is a bad idea from a security perspective).
 
 Enter "sudo useradd -m steam" to create a new user named steam. 
 Then, "sudo passwd steam", and enter your new password. 
 Log into our new steam user with "sudo -u steam -s"
-Then, enter our new steam directory with "cd /home/steam". Confirm our current directory using the command "pwd" - we should get the output "/home/steam".
+~~Then, enter our new steam directory with "cd /home/steam". Confirm our current directory using the command "pwd" - we should get the output "/home/steam".~~
 
 
 Next, we will be installing steamCMD, a tool used to install and update dedicated servers. For more information feel free to read the wiki https://developer.valvesoftware.com/wiki/SteamCMD
@@ -72,9 +74,9 @@ Enter these commands one at a time to install the required dependencies, followe
 - sudo apt install lib32gcc-s1 steamcmd"
 - cd ~
 
-Next, run this long command: "steamcmd +force_install_dir /home/steam/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit". 
+Next, run this long command: "steamcmd +force_install_dir /home/Ubuntu/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit". 
 
-This launches steamcmd, logins in using an anonymous user, downloads Valheim (896660 is the identifier used for Valheim in steam's database), and then exits the steamCMD utility.  
+This launches steamcmd, sets the install directory, logs in using an anonymous user, downloads Valheim (896660 is the identifier used for Valheim in steam's database), verifies installation, and then exits the steamCMD utility.  
 
 Navigate to outside 
 
