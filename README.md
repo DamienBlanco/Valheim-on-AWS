@@ -85,8 +85,12 @@ Next we'll create a simple shell script that can be run to easily update Valheim
 - chmod -R 755 .
 - You can test the script by running the following command: "./valheim_update.sh"
 
-Next, navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). If you used the default in this guide, you can get there using the command "cd /home/ubuntu/.steam/steamapps/common/valheim"
+Next we'll be modifying the script used to start the server. 
+- "cd /home/ubuntu/.steam/steamapps/common/valheim" - is the default used in this guide, otherwise navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). 
+- "cp start_server.sh /home/ubuntu" - This copies the shell script and places it in the home directory where we have our updater script. Navigate back via "cd /home/ubuntu"
+- "cd /home/ubuntu" - Navigate back to where we saved the shell copy
+- "mv start_server.sh valheim_start.sh" - This renames our shell script to valheim_start.sh
+- 
 
 
-
-# Part 3: Cost Optimizations: Auto-scaling your resources when not playing **(Work in Progress)**
+## Part 3: Cost Optimizations: Auto-scaling your resources when not playing **(Work in Progress)**
