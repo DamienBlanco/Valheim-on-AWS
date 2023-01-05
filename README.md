@@ -1,6 +1,6 @@
 # Valheim In the Cloud
 
-Technologies used: AWS | Linux | EC2 | steamCMD | 
+Technologies used: AWS | Linux | Shell Scripting | EC2 | steamCMD | 
 
 For this project I'll be walking you through the process to create a dedicated server for the steam game Valheim - all entirely hosted in the Amazon Cloud. While you can host a server on your own computer as you play, hosting it in the cloud will give you better performance (FPS) while also allowing any friends to play on your server without you being online. 
 
@@ -51,7 +51,7 @@ The last task for Part 1 is to update linux. Copy the command or type it, withou
 You should get a final output and then you're finished with Part 1! Next, we'll be installing Valheim and configuring it to run. 
 
 
-# Part 2: Setting up your Valheim Server
+## Part 2: Setting up your Valheim Server
 
 We have created and set up our EC2 linux server and implemented a few basic security measures. Next we'll be installing and configuring the Valheim dedicated server from steam. 
 
@@ -78,6 +78,15 @@ Next, run this long command: "steamcmd +force_install_dir /home/Ubuntu/.steam/st
 
 This launches steamcmd, sets the install directory, logs in using an anonymous user, downloads Valheim (896660 is the identifier used for Valheim in steam's database), verifies installation, and then exits the steamCMD utility.  
 
-Navigate to outside 
+Next we'll create a simple shell script that can be run to easily update Valheim. You can navigate to inside the Valheim install directory or simply place it in the /home/ubuntu location. 
+
+- touch valheim_update.sh
+- echo 'steamcmd +force_install_dir /home/Ubuntu/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit' >> valheim_update.sh
+- chmod -R 755 .
+- You can test the script by running the following command: "./valheim_update.sh"
+
+Next, navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). If you used the default in this guide, you can get there using the command "cd /home/ubuntu/.steam/steamapps/common/valheim"
+
+
 
 # Part 3: Cost Optimizations: Auto-scaling your resources when not playing **(Work in Progress)**
