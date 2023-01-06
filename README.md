@@ -99,11 +99,11 @@ Press escape to ensure you are in command mode, then press i to enter insert mod
 export TERM=xterm
 export templdpath=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
-export SteamAppId=892970\
+export SteamAppId=892970
 
-echo "Starting server PRESS CTRL-C to exit"\
+echo "Starting server PRESS CTRL-C to exit"
 
-./valheim_server.x86_64 -name "MyServerName" -port 2456 -world "Dedicated" -password "MyPassword"\
+./valheim_server.x86_64 -name "MyServerName" -port 2456 -world "Dedicated" -password "MyPassword"
 
 export LD_LIBRARY_PATH=$templdpath
 ```
