@@ -86,11 +86,29 @@ Next we'll create a simple shell script that can be run to easily update Valheim
 - You can test the script by running the following command: "./valheim_update.sh"
 
 Next we'll be modifying the script used to start the server. 
-- "cd /home/ubuntu/.steam/steamapps/common/valheim" - is the default used in this guide, otherwise navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). 
-- "cp start_server.sh /home/ubuntu" - This copies the shell script and places it in the home directory where we have our updater script. Navigate back via "cd /home/ubuntu"
-- "cd /home/ubuntu" - Navigate back to where we saved the shell copy
-- "mv start_server.sh valheim_start.sh" - This renames our shell script to valheim_start.sh
-- 
+- cd /home/ubuntu/.steam/steamapps/common/valheim - is the default used in this guide, otherwise navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). 
+- cp start_server.sh /home/ubuntu - This copies the shell script and places it in the home directory where we have our updater script. Navigate back via "cd /home/ubuntu"
+- cd /home/ubuntu - Navigate back to where we saved the shell copy
+- mv start_server.sh valheim_start.sh - This renames our shell script to valheim_start.sh
+- vim valheim_shart.sh - This opens the vim editor.
+
+We will need to make some changes using the vim editor. Here is a quick guide for the commands we can use <https://coderwall.com/p/adv71w/basic-vim-commands-for-getting-started> 
+
+Press escape to ensure you are in command mode, then press i to enter insert mode. You can navigate with arrow keys and input or delete text like normal. Edit the text by adding the extra export at the top, and make sure to change the server name and password as appropriate. When you are finished, hit escape to return to the command mode, and enter ":wq!" to save and quit. 
+```
+export TERM=xterm
+export templdpath=$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
+export SteamAppId=892970\
+
+echo "Starting server PRESS CTRL-C to exit"\
+
+./valheim_server.x86_64 -name "MyServerName" -port 2456 -world "Dedicated" -password "MyPassword"\
+
+export LD_LIBRARY_PATH=$templdpath
+```
+
+
 
 
 ## Part 3: Cost Optimizations: Auto-scaling your resources when not playing **(Work in Progress)**
