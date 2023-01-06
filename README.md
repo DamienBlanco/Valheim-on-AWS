@@ -2,17 +2,17 @@
 
 Technologies used: AWS | Linux | Shell Scripting | EC2 | steamCMD | 
 
-For this project I'll be walking you through the process to create a dedicated server for the steam game Valheim - all entirely hosted in the Amazon Cloud. While you can host a server on your own computer as you play, hosting it in the cloud will give you better performance (FPS) while also allowing any friends to play on your server without you being online. 
-
-EC2 instances will be charged at an hourly rate as per https://aws.amazon.com/ec2/pricing/on-demand/ or at a discount if you use dedicated pricing. For an optimised experience with multiple players, I recommend using the a1.xlarge instance type. 
-
-For the purposes of this guide we will be using Free Tier resources which will not result in charges to your account. This guide will also assume minimal knowledge about the cloud so explanations may be verbose.
-
 Part 1: Setting up your AWS EC2 Linux Instance
 
 Part 2: Setting up your Valheim Server
 
 Part 3: Cost Optimizations: Auto-scaling your resources when not playing (work in progress)
+
+For this project I'll be walking you through the process to create a dedicated server for the steam game Valheim - all entirely hosted in the Amazon Cloud. While you can host a server on your own computer as you play, hosting it in the cloud will give you better performance (FPS) while also allowing any friends to play on your server without you being online. 
+
+EC2 instances will be charged at an hourly rate as per https://aws.amazon.com/ec2/pricing/on-demand/ or at a discount if you use dedicated pricing. For an optimised experience with multiple players, I recommend using the a1.xlarge instance type. 
+
+For the purposes of this guide we will be using Free Tier resources which will not result in charges to your account. This guide will also assume minimal knowledge about the cloud so explanations may be verbose.
 
 ## Part 1: Setting up your AWS EC2 Linux Instance
 
