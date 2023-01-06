@@ -94,7 +94,7 @@ Next we'll be modifying the script used to start the server.
 
 We will need to make some changes using the vim editor. Here is a quick guide for the commands we can use <https://coderwall.com/p/adv71w/basic-vim-commands-for-getting-started> 
 
-Press escape to ensure you are in command mode, then press i to enter insert mode. You can navigate with arrow keys and input or delete text like normal. Edit the text by adding the extra export at the top, and make sure to change the server name and password as appropriate. When you are finished, hit escape to return to the command mode, and enter ":wq!" to save and quit. 
+Press escape to ensure you are in command mode, then press i to enter insert mode. You can navigate with arrow keys and input or delete text like normal. Edit the text by adding the extra export at the top, and make sure to change the server name and password as appropriate. **At the time of writing "--crossplay" must be deleted from the script as it breaks the server**. When you are finished, hit escape to return to the command mode, and enter ":wq!" to save and quit. 
 ```
 export TERM=xterm
 export templdpath=$LD_LIBRARY_PATH
