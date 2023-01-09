@@ -10,9 +10,10 @@ Part 3: Cost Optimizations: Auto-scaling your resources when not playing (work i
 
 For this project I'll be walking you through the process to create a dedicated server for the steam game Valheim - all entirely hosted in the Amazon Cloud. While you can host a server on your own computer as you play, hosting it in the cloud will give you better performance (FPS) while also allowing any friends to play on your server without you being online. 
 
-EC2 instances will be charged at an hourly rate as per https://aws.amazon.com/ec2/pricing/on-demand/ or at a discount if you use dedicated pricing. For an optimised experience with multiple players, I recommend using the a1.xlarge instance type. 
+This guide will show the manual way to install and configure all resources. Faster automated methods using docker containers exist; however, this guide is intended as a fun way to learn linux and AWS features and comes with many explanations.
 
-For the purposes of this guide we will be using Free Tier resources which will not result in charges to your account. This guide will also assume minimal knowledge about the cloud so explanations may be verbose.
+EC2 instances will be charged at an hourly rate as per https://aws.amazon.com/ec2/pricing/on-demand/ or at a discount if you use dedicated pricing. For an optimised experience with multiple players, I recommend using the t3a.large instance type as the latest Mistlands update has pushed the RAM usage above 6GB.
+
 
 ## Part 1: Setting up your AWS EC2 Linux Instance
 
@@ -81,15 +82,13 @@ This launches steamcmd, sets the install directory, logs in using an anonymous u
 Next we'll create a simple shell script that can be run to easily update Valheim. You can navigate to inside the Valheim install directory or simply place it in the /home/ubuntu location. 
 
 - touch valheim_update.sh
-- echo 'steamcmd +force_install_dir /home/Ubuntu/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit' >> valheim_update.sh
+- echo 'steamcmd +force_install_dir /home/ubuntu/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit' >> valheim_update.sh
 - chmod -R 755 .
 - You can test the script by running the following command: "./valheim_update.sh"
 
 Next we'll be modifying the script used to start the server. 
 - cd /home/ubuntu/.steam/steamapps/common/valheim - is the default used in this guide, otherwise navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). 
-- cp start_server.sh /home/ubuntu - This copies the shell script and places it in the home directory where we have our updater script. Navigate back via "cd /home/ubuntu"
-- cd /home/ubuntu - Navigate back to where we saved the shell copy
-- mv start_server.sh valheim_start.sh - This renames our shell script to valheim_start.sh
+- cp start_server.sh valheim_start.sh - This makes a copy of the shell script
 - vim valheim_shart.sh - This opens the vim editor.
 
 We will need to make some changes using the vim editor. Here is a quick guide for the commands we can use <https://coderwall.com/p/adv71w/basic-vim-commands-for-getting-started> 
@@ -107,6 +106,8 @@ echo "Starting server PRESS CTRL-C to exit"
 
 export LD_LIBRARY_PATH=$templdpath
 ```
+We're almost done. The server is playable and connectable at this point, however it will shut down if you close the ssh connection. We will need to complete one more step so that it can run without us being logged in.
+
 
 
 
