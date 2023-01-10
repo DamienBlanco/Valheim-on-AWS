@@ -108,7 +108,29 @@ export LD_LIBRARY_PATH=$templdpath
 ```
 We're almost done. The server is playable and connectable at this point, however it will shut down if you close the ssh connection. We will need to complete one more step so that it can run without us being logged in.
 
+- cd /etc/systemd/system
+- sudo touch valheim.service
+- sudo vim valheim.service
 
+Modify valheim.service so that it looks like the following using the vim editor as before.
+```
+[Unit]
+Description=Valheim service
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+User=steam
+WorkingDirectory=/home/ubuntu/.steam/steamapps/common/valheim/
+ExecStart=/bin/sh /home/ubuntu/.steam/steamapps/common/valheim/valheim_start.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+If you've changed the installation directory for valheim, created a separate user to install the server on, or named your startup script something else, be sure to modify this template as appropriate.
 
 
 
