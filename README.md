@@ -56,15 +56,7 @@ You should get a final output and then you're finished with Part 1! Next, we'll 
 
 We have created and set up our EC2 linux server and implemented a few basic security measures. Next we'll be installing and configuring the Valheim dedicated server from steam. 
 
-~~First, we'll create a separate user that we'll run things from (using root user is a bad idea from a security perspective).
-
-Enter "sudo useradd -m steam" to create a new user named steam. 
-Then, "sudo passwd steam", and enter your new password. 
-Log into our new steam user with "sudo -u steam -s"
-~~Then, enter our new steam directory with "cd /home/steam". Confirm our current directory using the command "pwd" - we should get the output "/home/steam".~~
-
-
-Next, we will be installing steamCMD, a tool used to install and update dedicated servers. For more information feel free to read the wiki https://developer.valvesoftware.com/wiki/SteamCMD
+We will be installing steamCMD, a tool used to install and update dedicated servers. For more information feel free to read the wiki https://developer.valvesoftware.com/wiki/SteamCMD
 
 Enter these commands one at a time to install the required dependencies, followed by steamCMD:
 
@@ -133,10 +125,11 @@ WantedBy=multi-user.target
 If you've changed the installation directory for valheim, created a separate user to install the server on, or named your startup script something else, be sure to modify this template as appropriate.
 
 - cd /home/ubuntu
-- sudo systemctl enable valheim
 - echo 'sudo systemctl start valheim' >> boot_server.sh
 
-You can now run the boot_server.sh to start your server (remember, using ./ followed by the script you are executing)! Players can connect using your ec2 instance's public ip address which you can find by entering the command 'hostname -i' or via the aws instance tab. 
+This will create a startup script for the valheim service. You can start it by executing the script (./ followed by script name). Alternatively, you can set the service to automatically start every time linux launches by using the command "sudo systemctl enable valheim" (disable this feature by replacing enable with disable). 
+
+You can now run the boot_server.sh to start your server (remember, using ./ followed by the script you are executing)! Players can connect using your ec2 instance's public ip address which you can find by entering the command 'hostname -i' or via the aws instance tab. Happy playing!
 
 
 
