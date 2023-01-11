@@ -11,12 +11,16 @@ EC2 instances will be charged at an hourly rate as per https://aws.amazon.com/ec
 
 ## Part 1: Setting up your AWS EC2 Linux Instance
 
+### Creating and configuring your AWS account
+
 Begin by making an account at  https://aws.amazon.com/ 
 Once your account is verified, the first thing you should do is enable MFA (multi factor authentication) as a security practice. 
 
 On the aws console https://us-east-1.console.aws.amazon.com/console/home?region=us-east-1 use the search bar in the top left. Enter "IAM" (Identity access management). Once you are on the IAM dashboard click "Add MFA" near the top right of the page. 
 
 Click on "Activate MFA" in the "Multi-factor authentication (MFA)" tab and create a name, select "virtual MFA device", and continue. If you are using android you can use google's official authenticator app as your phone's 2FA device, or click on the list of compatible applications to choose your preferred app. Complete setup via instructions and return to the aws console.
+
+### Launching your EC2 Instance
 
 Next, we will be launching our EC2 instance which will function as our Valheim server. Navigate to the top left search bar and enter "EC2" 
 
@@ -37,6 +41,8 @@ The first security group allows you to connect to your instance, while the secon
 
 All other settings can be left at default. https://i.imgur.com/2BMORg6.png 
 
+### Updating your Linux instance
+
 Launch the instance and then return to the instances tab. You should see your Valheim server running. You can click on the checkbox and examine details such as its public IP address. 
 
 To connect to your instance you can either use a GUI SSH tool like PuTTY or connect using the AWS console. To connect using the AWS console select your server and connect at the top right. Choose "EC2 Instance Connect". The default username for the linux server, ubuntu, should already be filled in. Click connect and you will be in!
@@ -50,6 +56,8 @@ Read the output and accept the update. You should get a final output and then yo
 
 
 ## Part 2: Setting up your Valheim Server
+
+### Installing Valheim
 
 We have created and set up our EC2 linux server and implemented a few basic security measures. Next we'll be installing and configuring the Valheim dedicated server from steam. 
 
@@ -74,6 +82,8 @@ Next we'll create a simple shell script that can be run to easily update Valheim
 - chmod -R 755 .
 - You can test the script by running the following command: "./valheim_update.sh"
 
+### Configuring your server
+
 Next we'll be modifying the script used to start the server. 
 - cd /home/ubuntu/.steam/steamapps/common/valheim - is the default used in this guide, otherwise navigate to where you installed valheim using the ls and cd commands (hidden directories need the ls -a command). 
 - cp start_server.sh valheim_start.sh - This makes a copy of the shell script
@@ -94,6 +104,8 @@ echo "Starting server PRESS CTRL-C to exit"
 
 export LD_LIBRARY_PATH=$templdpath
 ```
+### Creating a launch method
+
 We're almost done. The server is playable and connectable at this point, however it will shut down if you close the ssh connection. We will need to complete one more step so that it can run without us being logged in. This will set up a service using systemd.
 
 - cd /etc/systemd/system
