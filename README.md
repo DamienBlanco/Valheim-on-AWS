@@ -1,6 +1,6 @@
 # Valheim In the Cloud
 
-Technologies used: AWS | EC2 | Linux | Shell Scripting | steamCMD | systemD
+Technologies used: AWS | EC2 | Linux | Shell Scripting | steamCMD | systemd
 
 For this project I'll be walking you through the process to create a dedicated server for the steam game Valheim - all entirely hosted in the Amazon Cloud. While you can host a server on your own computer as you play, hosting it in the cloud will give you better performance (FPS) while also allowing any friends to play on your server without you being online. 
 
