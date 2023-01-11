@@ -1,12 +1,6 @@
 # Valheim In the Cloud
 
-Technologies used: AWS | Linux | Shell Scripting | EC2 | steamCMD | 
-
-Part 1: Setting up your AWS EC2 Linux Instance
-
-Part 2: Setting up your Valheim Server
-
-Part 3: Cost Optimizations: Auto-scaling your resources when not playing (work in progress)
+Technologies used: AWS | EC2 | Linux | Shell Scripting | steamCMD | systemD
 
 For this project I'll be walking you through the process to create a dedicated server for the steam game Valheim - all entirely hosted in the Amazon Cloud. While you can host a server on your own computer as you play, hosting it in the cloud will give you better performance (FPS) while also allowing any friends to play on your server without you being online. 
 
@@ -29,7 +23,7 @@ Next, we will be launching our EC2 instance which will function as our Valheim s
 On the left sidebar click "Instances" under the instances tab. This is where you are able to monitor your EC2 instances. It provides plenty of useful information which we will need later, but for now we will launch our server instance.
 
 Click "Launch instances" in the top right. Give your instance a name; for this blog we will name it **Valheim-Server**. Select Ubuntu 22.04 for your AMI.
-Next is the instance type. For the purposes of this blog we will be using the t2.micro as it is free to use. However, for optimal performance an a1.xlarge instance would fit; review the pricing accordingly. 
+Next choose the instance type; for optimal performance I recommend a t3a.large instance; review the pricing accordingly. 
 
 Next, create a key pair. **This is very important**. This is a file that acts as the password to your instance so make sure you create it and keep it secure. For the purposes of this blog the keypair will be named **Chinese Electric Batman Keypair**. 
 
@@ -47,9 +41,12 @@ Launch the instance and then return to the instances tab. You should see your Va
 
 To connect to your instance you can either use a GUI SSH tool like PuTTY or connect using the AWS console. To connect using the AWS console select your server and connect at the top right. Choose "EC2 Instance Connect". The default username for the linux server, ubuntu, should already be filled in. Click connect and you will be in!
 
-The last task for Part 1 is to update linux. Copy the command or type it, without quotes, "sudo apt update" and paste it into the console by right-clicking and selecting paste (or just right clicking using PuTTY). Then, "sudo apt upgrade". Read the output and accept the update.
+The last task for Part 1 is to update linux. Enter the following commands into the CLI (you can paste them by right clicking and selecting paste, or just right clicking if you're using puTTY
 
-You should get a final output and then you're finished with Part 1! Next, we'll be installing Valheim and configuring it to run. 
+- sudo apt update
+- sudo apt upgrade
+
+Read the output and accept the update. You should get a final output and then you're finished with Part 1! Next, we'll be installing Valheim and configuring it to run. 
 
 
 ## Part 2: Setting up your Valheim Server
@@ -66,10 +63,9 @@ Enter these commands one at a time to install the required dependencies, followe
 - sudo apt update
 - sudo apt install lib32gcc-s1 steamcmd"
 - cd ~
+- steamcmd +force_install_dir /home/Ubuntu/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit
 
-Next, run this long command: "steamcmd +force_install_dir /home/Ubuntu/.steam/steamapps/common/valheim +login anonymous +app_update 896660 validate +exit". 
-
-This launches steamcmd, sets the install directory, logs in using an anonymous user, downloads Valheim (896660 is the identifier used for Valheim in steam's database), verifies installation, and then exits the steamCMD utility.  
+The last command launches steamcmd, sets the install directory, logs in using an anonymous user, downloads Valheim (896660 is the identifier used for Valheim in steam's database), verifies installation, and then exits the steamCMD utility.  
 
 Next we'll create a simple shell script that can be run to easily update Valheim. You can navigate to inside the Valheim install directory or simply place it in the /home/ubuntu location. 
 
