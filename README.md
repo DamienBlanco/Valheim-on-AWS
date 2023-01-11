@@ -126,6 +126,7 @@ If you've changed the installation directory for valheim, created a separate use
 
 - cd /home/ubuntu
 - echo 'sudo systemctl start valheim' >> boot_server.sh
+- sudo chmod -R 775 .
 
 This will create a startup script for the valheim service. You can start it by executing the script (./ followed by script name). Alternatively, you can set the service to automatically start every time linux launches by using the command "sudo systemctl enable valheim" (disable this feature by replacing enable with disable). 
 
