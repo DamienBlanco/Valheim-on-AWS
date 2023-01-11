@@ -106,7 +106,7 @@ echo "Starting server PRESS CTRL-C to exit"
 
 export LD_LIBRARY_PATH=$templdpath
 ```
-We're almost done. The server is playable and connectable at this point, however it will shut down if you close the ssh connection. We will need to complete one more step so that it can run without us being logged in.
+We're almost done. The server is playable and connectable at this point, however it will shut down if you close the ssh connection. We will need to complete one more step so that it can run without us being logged in. This will set up a service using systemd.
 
 - cd /etc/systemd/system
 - sudo touch valheim.service
@@ -123,7 +123,7 @@ After=syslog.target network-online.target
 Type=simple
 Restart=on-failure
 RestartSec=10
-User=steam
+User=ubuntu
 WorkingDirectory=/home/ubuntu/.steam/steamapps/common/valheim/
 ExecStart=/bin/sh /home/ubuntu/.steam/steamapps/common/valheim/valheim_start.sh
 
@@ -131,6 +131,12 @@ ExecStart=/bin/sh /home/ubuntu/.steam/steamapps/common/valheim/valheim_start.sh
 WantedBy=multi-user.target
 ```
 If you've changed the installation directory for valheim, created a separate user to install the server on, or named your startup script something else, be sure to modify this template as appropriate.
+
+- cd /home/ubuntu
+- sudo systemctl enable valheim
+- echo 'sudo systemctl start valheim' >> boot_server.sh
+
+You can now run the boot_server.sh to start your server (remember, using ./ followed by the script you are executing)! Players can connect using your ec2 instance's public ip address which you can find by entering the command 'hostname -i' or via the aws instance tab. 
 
 
 
