@@ -39,7 +39,9 @@ For Security group rule 2: Type = custom UDP, Source = 0.0.0.0/0, port range of 
 
 The first security group allows you to connect to your instance, while the second opens up the UDP ports that Valheim uses to connect to players.
 
-All other settings can be left at default. https://i.imgur.com/2BMORg6.png 
+All other settings can be left at default. 
+
+![Image for EC2 configuration](https://i.imgur.com/2BMORg6.png)
 
 ### Updating your Linux instance
 
@@ -140,6 +142,7 @@ This will create a startup script for the valheim service. You can start it by e
 
 You can now run the boot_server.sh to start your server (remember, using ./ followed by the script you are executing)! Players can connect using your ec2 instance's public ip address which you can find by entering the command 'hostname -i' or via the aws instance tab. Happy playing!
 
+![Final in-game picture](https://i.imgur.com/O6qwbAJ.png)
 
 
 ## Part 3: Cost Optimizations: Auto-scaling your resources when not playing **(Work in Progress)**
